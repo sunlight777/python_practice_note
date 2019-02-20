@@ -1,0 +1,32 @@
+'''
+https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014317799226173f45ce40636141b6abc8424e12b5fb27000
+'''
+
+#生成扬州三角形
+
+#方法1：
+def triangles():
+    n=1
+    result=[]
+    while  True:
+      L=[]
+      for i in range(n):
+         l=[]
+         if i==0:
+            l.append(1)
+            L=L+l
+         elif i==n-1:
+            l.append(1)
+            L=L+l
+         else :
+            l.append(result[n-2][i]+result[n-2][i-1])
+            L=L+l
+      yield  L      
+      n=n+1
+      result.append(L)
+#方法2：
+def triangles():
+   i=[1]
+   while True:
+     yield i
+     i=[x+y for k,x in enumerate([0]+i)  for j,y in enumerate(i+[0]) if k==j ]
