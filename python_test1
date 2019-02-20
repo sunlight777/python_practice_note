@@ -1,0 +1,19 @@
+    if len(L)==0:
+      min='None'
+      max='None'
+      return(None,None)
+    else :
+      min=L[0]
+      max=L[0]
+    for x in L:
+       if x >= min:
+          min=min
+       else:
+          min=x
+       if  x >= max:
+          max=x
+       else:
+          max=max
+    return (min, max)
+if findMinAndMax([]) != (None, None):
+    print('测试失败!')
