@@ -1,0 +1,35 @@
+
+'''
+https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014317852443934a86aa5bb5ea47fbbd5f35282b331335000
+'''
+
+def normalize(name):
+    x=name[0].upper()+name[1:].lower()
+    return x
+    
+    
+# -*- coding: utf-8 -*-
+from functools import reduce
+def prod(L):
+    def sj(x,y):
+       return x*y
+    x=reduce(sj,L)
+    return x
+
+# -*- coding: utf-8 -*-
+from functools import reduce
+def str2float(s):
+   DIGITS = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}
+   def char2num(s):
+      return DIGITS[s]   
+   def lsj(s): 
+      return reduce(lambda x,y:x*10+y,map(char2num, s) )
+   def lsj1(s):
+      return reduce(lambda x,y:x*0.1+y,map(char2num, s) )
+   a=s.split('.')[0]
+   b=s.split('.')[1]
+   from collections import Iterable
+   print( isinstance (list(b)[::-1],Iterable))
+   l1=lsj(a)
+   l2=0.1*lsj1(list(b)[::-1])
+   return l1+l2
