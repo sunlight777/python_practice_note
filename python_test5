@@ -1,0 +1,55 @@
+'''
+回数是指从左向右读和从右向左读都是一样的数，例如12321，909。请利用filter()筛选出回数：
+https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431821084171d2e0f22e7cc24305ae03aa0214d0ef29000
+'''
+
+def is_palindrome(n):
+    n=str(n)
+    l=len(n)
+    l1=int(l/2)
+    a=False
+    if l==1:
+       a=True
+    else:
+      for i in range(0,l1):
+        if n[i]==n[l-1-i]:
+           a=True
+        else:
+           a=False
+    return a
+    
+ '''
+生成素数的方法
+https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431821084171d2e0f22e7cc24305ae03aa0214d0ef29000
+'''
+    
+    
+    #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+def main():
+    for n in primes():
+        if n < 1000:
+            print(n)
+        else:
+            break
+
+def _odd_iter():
+    n = 1
+    while True:
+        n = n + 2
+        yield n
+
+def _not_divisible(n):
+    return lambda x: x % n > 0
+
+def primes():
+    yield 2
+    it = _odd_iter()
+    while True:
+        n = next(it)
+        yield n
+        it = filter(_not_divisible(n), it)
+
+if __name__ == '__main__':
+main()
