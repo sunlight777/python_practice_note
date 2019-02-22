@@ -1,0 +1,35 @@
+'''
+请设计一个decorator，它可作用于任何函数上，并打印该函数的执行时间：
+https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014318435599930270c0381a3b44db991cd6d858064ac0000
+'''
+
+
+# -*- coding: utf-8 -*-
+import time, functools
+import functools
+def metric(fn):
+    @functools.wraps(fn)
+    def wae(*a,**k):
+       t1=time.time()
+       fn(*a,**k)
+       t2=time.time()
+       print('%s executed in %s ms' % (fn.__name__, t1-t2))
+       return  fn(*a,**k)
+    return wae
+
+# 测试
+@metric
+def fast(x, y):
+    time.sleep(0.0012)
+    return x + y;
+
+@metric
+def slow(x, y, z):
+    time.sleep(0.1234)
+    return x * y * z;
+
+f = fast(11, 22)
+s = slow(11, 22, 33)
+
+now = metric(fast)
+print(now.__name__)
