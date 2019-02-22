@@ -33,3 +33,40 @@ s = slow(11, 22, 33)
 
 now = metric(fast)
 print(now.__name__)
+
+
+'''
+请编写一个decorator，能在函数调用的前后打印出'begin call'和'end call'的日志
+
+'''
+
+import functools
+
+def log(text):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            print("start call")
+            print("func = %s" % func.__name__)
+            r = func(*args, **kw)
+            print('Eng call')
+            return r
+        return wrapper
+    return decorator if isinstance(text, str) else decorator(text)   
+    #在调试里面跑了一下，不写参数的时候，text拿到的实际是函数对象，就是本来func应该拿到的那个，结果让text提前吃掉了,截胡了你程序里的now。
+    #decorator(text) 的意思就是，如果发现text不是str类型，那么就是本该传给内层func的函数让外层提前拿走了，并且放在了text里面。
+    #这时应该手动把text传给里面那层，于是就return了 decorator(text)
+
+
+@log
+def f():
+    pass
+
+ 
+
+@log('execute')
+def f():
+    print('-------------')
+
+
+print(f())
